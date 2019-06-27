@@ -1,5 +1,6 @@
-import { Input, Component, ElementRef, AfterViewInit, ViewChild, OnInit, Renderer2, TemplateRef } from '@angular/core';
+import { Input, Component, ElementRef, OnDestroy, AfterViewInit, ViewChild, OnInit, Renderer2, TemplateRef } from '@angular/core';
 import { Router } from '@angular/router';
+import { interval, Subscription, Observable } from 'rxjs'
 import { Room } from '../../room.model';
 
 @Component({
@@ -7,8 +8,11 @@ import { Room } from '../../room.model';
   templateUrl: './room-item.component.html',
   styleUrls: ['./room-item.component.scss']
 })
-export class RoomItemComponent implements AfterViewInit {
-  private nextAnimationPoint: boolean = true
+export class RoomItemComponent implements AfterViewInit, OnInit, OnDestroy {
+
+  private breatheSubscription: Subscription;
+  private nextAnimationPoint: boolean = true;
+  timepassed;
 
   @Input() room: Room;
 
@@ -18,20 +22,41 @@ export class RoomItemComponent implements AfterViewInit {
     private renderer: Renderer2
     ) { }
 
+  ngOnInit() {
+
+  }
+
   ngAfterViewInit() {
 
-    const wiggleRooms = () => {
+    const breatheRooms = () => {
       this.nextAnimationPoint? this.renderer.addClass(this.el.nativeElement, 'active') : this.renderer.removeClass(this.el.nativeElement, 'active');
       this.nextAnimationPoint = !this.nextAnimationPoint
     } 
-    wiggleRooms()
-    setInterval(() => wiggleRooms(), 3000)
+
+    this.breatheSubscription = interval(3000).subscribe( count => {
+      // console.log(count)
+    })
+    // wiggleRooms()
+    // this.intervalTimer = setInterval(() => wiggleRooms(), 3000)
+    // console.log("intervalTimer", this.intervalTimer)
+
+    // Wiggle observable
+
+
+
+  }
+
+  ngOnDestroy(): void {
 
   }
 
   onRoomClick() {
-    this.router.navigate(['/room', this.room.id]);
+    console.log("click plaese", this.breatheSubscription)
+    this.breatheSubscription.unsubscribe()
+    // this.router.navigate(['/room', this.room.id]);
   }
+
+
 }
 
 
