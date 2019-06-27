@@ -50,10 +50,15 @@ export class RoomInsideComponent implements OnInit, OnDestroy {
       //   return `alwfnalwknf ${data}`
       // }))
       .subscribe(data => {
+        console.log('that is... this?', this)
         this.timer.timepassed = data
+        console.log("data", data)
+        console.log("this.timer", this.timer.timepassed)
       }, error => {
+        console.log("error", error)
         alert(error.message)
       }, () => { // only when it's complete without an error
+        console.log('completed!')
       })
 
 
