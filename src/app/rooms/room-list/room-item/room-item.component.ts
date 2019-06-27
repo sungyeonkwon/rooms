@@ -8,6 +8,7 @@ import { Room } from '../../room.model';
   styleUrls: ['./room-item.component.scss']
 })
 export class RoomItemComponent implements AfterViewInit {
+  private nextAnimationPoint: boolean = true
 
   @Input() room: Room;
 
@@ -18,19 +19,17 @@ export class RoomItemComponent implements AfterViewInit {
     ) { }
 
   ngAfterViewInit() {
-    // this.renderer.setStyle(this.el.nativeElement, 'width', '25%');
-    console.log("tha", this.el.nativeElement.querySelector('a'))
-    const roomWrapper = this.el.nativeElement.querySelector('app-room-item ')
 
-    setTimeout(() => {
-      // console.log('gota', roomWrapper)
-      this.renderer.addClass(this.el.nativeElement, 'active');
-    },2000)
+    const wiggleRooms = () => {
+      this.nextAnimationPoint? this.renderer.addClass(this.el.nativeElement, 'active') : this.renderer.removeClass(this.el.nativeElement, 'active');
+      this.nextAnimationPoint = !this.nextAnimationPoint
+    } 
+    wiggleRooms()
+    setInterval(() => wiggleRooms(), 3000)
 
   }
 
   onRoomClick() {
-    console.log("room was clicked, what is id", this.room.id)
     this.router.navigate(['/room', this.room.id]);
   }
 }
