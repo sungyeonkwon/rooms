@@ -1,31 +1,7 @@
-<!-- <div
-  class="room-container"
-  >
+<div class="room-container">
   <app-room-item
-  *ngFor="let room of rooms; let i = index"
+  *ngFor="let room of rooms"
   [room]="room"
   >
   </app-room-item>
-</div> -->
-
-<hr>
-<div (click) ="onClickTest()">HELLO click me to test!</div>
-<hr>
-
-<div 
-  class="room-flex-container" 
-  *ngFor="let roomPackage of roomPackages"
-  >
-  <div
-  class="room"
-  *ngFor="let roomEl of roomPackage; let i = index"
-  >
-    <app-room-item
-    [room]="roomEl"
-    >
-    </app-room-item>
-  </div>
-
 </div>
-
-

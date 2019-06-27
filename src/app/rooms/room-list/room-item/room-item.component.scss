@@ -1,9 +1,10 @@
 .room-wrapper {
+  height:100%;
   width:100%;
   display: inline-block;
   cursor: pointer;
-  border: 1px solid blue;
+  border: 10px solid blue;
 }
 .room-wrapper:hover {
-  background-color: yellow;
+  background-color: white;
 }
