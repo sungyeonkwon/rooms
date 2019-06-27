@@ -1,4 +1,4 @@
-import { Input, Component, ElementRef, AfterViewInit, ViewChild, OnInit, Renderer2, TemplateRef } from '@angular/core';
+import { Input, Component, EventEmitter, ElementRef, AfterViewInit, ViewChild, OnInit, Renderer2, TemplateRef, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Room } from '../../room.model';
 
@@ -9,8 +9,9 @@ import { Room } from '../../room.model';
 })
 export class RoomItemComponent implements AfterViewInit {
   private nextAnimationPoint: boolean = true
-
+  @Input() timeCount: number;
   @Input() room: Room;
+  @Output() roomClicked = new EventEmitter()
 
   constructor(
     private router: Router,
@@ -20,17 +21,24 @@ export class RoomItemComponent implements AfterViewInit {
 
   ngAfterViewInit() {
 
-    const wiggleRooms = () => {
-      this.nextAnimationPoint? this.renderer.addClass(this.el.nativeElement, 'active') : this.renderer.removeClass(this.el.nativeElement, 'active');
-      this.nextAnimationPoint = !this.nextAnimationPoint
-    } 
-    wiggleRooms()
-    setInterval(() => wiggleRooms(), 3000)
-
   }
 
-  onRoomClick() {
-    this.router.navigate(['/room', this.room.id]);
+  ngOnChanges() {
+    console.log("detecting changes?")
+    this.wiggleRooms()
+  }
+
+  wiggleRooms() {
+    this.nextAnimationPoint? this.renderer.addClass(this.el.nativeElement, 'active') : this.renderer.removeClass(this.el.nativeElement, 'active');
+    this.nextAnimationPoint = !this.nextAnimationPoint
+  }
+
+  onRoomClick(event: any) {
+    // Unsubscribe the parent event
+    this.roomClicked.emit()
+    console.log("child compe", event, this.roomClicked)
+
+    // this.router.navigate(['/room', this.room.id]);
   }
 }
 

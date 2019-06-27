@@ -1,9 +1,9 @@
 .room-wrapper {
+  cursor: pointer;
   height:100%;
   width:100%;
   padding: 10px;
   display: inline-block;
-  cursor: pointer;
   border: 1px solid blue;
   transition: width 1s;
   text-align: center;
