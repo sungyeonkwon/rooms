@@ -1,5 +1,17 @@
 .room-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: 300px;
+  // display: grid;
+  // grid-template-columns: 1fr 1fr 1fr 1fr;
+  // grid-template-rows: 300px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+app-room-item {
+  transition: all 1s;
+  color: white;
+  width:20%;
+}
+
+app-room-item.active {
+  width:40%;
 }
