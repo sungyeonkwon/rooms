@@ -2,6 +2,7 @@ import { Input, Component, EventEmitter, ElementRef, AfterViewInit, ViewChild, O
 import { Router } from '@angular/router';
 import { Room } from '../../room.model';
 
+
 @Component({
   selector: 'app-room-item',
   templateUrl: './room-item.component.html',
@@ -24,7 +25,7 @@ export class RoomItemComponent implements AfterViewInit {
   }
 
   ngOnChanges() {
-    console.log("detecting changes?")
+    // Updated timeCount activates the wiggle
     this.wiggleRooms()
   }
 
@@ -34,11 +35,14 @@ export class RoomItemComponent implements AfterViewInit {
   }
 
   onRoomClick(event: any) {
-    // Unsubscribe the parent event
+    // Emit event to unsubscribe the parent event
     this.roomClicked.emit()
-    console.log("child compe", event, this.roomClicked)
 
-    // this.router.navigate(['/room', this.room.id]);
+    // CSS transition to be stopped
+
+
+    // Go inside of the room
+    setTimeout(() => {this.router.navigate(['/room', this.room.id])}, 2000)
   }
 }
 

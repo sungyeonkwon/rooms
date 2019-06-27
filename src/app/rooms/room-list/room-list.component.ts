@@ -3,6 +3,7 @@ import { interval, Subscription } from 'rxjs'
 
 import { Room } from '../room.model'
 import { RoomService } from '../room.service'
+import { ContentService } from '../../content/content.service'
 
 @Component({
   selector: 'app-room-list',
@@ -15,14 +16,19 @@ export class RoomListComponent implements OnInit, OnDestroy {
   timeCount: number;
   rooms: Room[];
 
-  constructor(private roomService: RoomService) { }
+  constructor(
+    private roomService: RoomService,
+    private contentService: ContentService
+  ) { }
 
   ngOnInit() {
     this.rooms = this.roomService.getRooms()
 
-    this.breathingSubscription = interval(3000).subscribe(count => {
+    this.breathingSubscription = interval(2000).subscribe(count => {
       this.timeCount = count
     })
+
+    console.log('checking out ContentService', this.contentService.getContents())
 
   }
 
@@ -31,7 +37,6 @@ export class RoomListComponent implements OnInit, OnDestroy {
   }
 
   onRoomClicked() {
-    console.log("some room was clicked")
     this.breathingSubscription.unsubscribe();
   }
 

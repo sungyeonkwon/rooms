@@ -33,7 +33,7 @@ export class RoomInsideComponent implements OnInit, OnDestroy {
       let timePassed = 0
       setInterval(() => {
         observer.next(timePassed)
-        timePassed += 1500
+        timePassed += 1000
         if (timePassed == 6000) {
           observer.complete()
         }
@@ -45,10 +45,6 @@ export class RoomInsideComponent implements OnInit, OnDestroy {
     })
 
     this.ObsSubscription = customIntervalObservable
-      // .pipe(map((data) => {
-      //   // Change something and manupulate something
-      //   return `alwfnalwknf ${data}`
-      // }))
       .subscribe(data => {
         console.log('that is... this?', this)
         this.timer.timepassed = data
