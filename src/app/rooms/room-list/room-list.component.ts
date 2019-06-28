@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, ElementRef, ViewChildren, OnInit, OnDestroy } from '@angular/core';
 import { interval, Subscription } from 'rxjs'
 
 import { Room } from '../room.model'
@@ -15,6 +15,7 @@ export class RoomListComponent implements OnInit, OnDestroy {
   private breathingSubscription: Subscription;
   timeCount: number;
   rooms: Room[];
+  @ViewChildren('roomItem') roomItem: ElementRef;
 
   constructor(
     private roomService: RoomService,
@@ -36,8 +37,14 @@ export class RoomListComponent implements OnInit, OnDestroy {
     this.breathingSubscription.unsubscribe();
   }
 
-  onRoomClicked() {
-    this.breathingSubscription.unsubscribe();
+  onRoomClicked(): void {
+    console.log("unsubsrvbe")
+    const roomItem = this.roomItem
+    this.roomService.stopRoomAnimation(roomItem)
+    // console.log("roomItem", roomItem)
+
+    // ACTIVATE
+    // this.breathingSubscription.unsubscribe();
   }
 
 }

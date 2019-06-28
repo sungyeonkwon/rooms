@@ -1,6 +1,8 @@
-import { Input, Component, EventEmitter, ElementRef, AfterViewInit, ViewChild, OnInit, Renderer2, TemplateRef, Output } from '@angular/core';
+import { Input, Component, EventEmitter, ElementRef, AfterViewInit, OnInit, Renderer2, TemplateRef, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Room } from '../../room.model';
+import { RoomService } from '../../room.service';
+import { runInThisContext } from 'vm';
 
 
 @Component({
@@ -17,7 +19,8 @@ export class RoomItemComponent implements AfterViewInit {
   constructor(
     private router: Router,
     private el: ElementRef,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    private roomService: RoomService,
     ) { }
 
   ngAfterViewInit() {
@@ -38,11 +41,8 @@ export class RoomItemComponent implements AfterViewInit {
     // Emit event to unsubscribe the parent event
     this.roomClicked.emit()
 
-    // CSS transition to be stopped
-
-
     // Go inside of the room
-    setTimeout(() => {this.router.navigate(['/room', this.room.id])}, 2000)
+    setTimeout(() => {this.router.navigate(['/room', this.room.id])}, 3000)
   }
 }
 

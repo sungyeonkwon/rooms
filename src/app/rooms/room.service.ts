@@ -26,4 +26,27 @@ export class RoomService {
   getRooms() {
     return this.rooms.slice()
   }
+
+  stopRoomAnimation(elements){
+    elements.forEach((v) => {
+      const el = v.el.nativeElement
+      
+      // Get the computed style
+      const styles = getComputedStyle(el)
+      const snappedWidth =  styles.getPropertyValue('width')
+      const snappedHeight =  styles.getPropertyValue('height')
+      const snappedBG =  styles.getPropertyValue('background')
+
+      // Pause the animation
+      v.renderer.setStyle(el,'width', snappedWidth)
+      v.renderer.setStyle(el,'height', snappedHeight)
+      v.renderer.setStyle(el,'background', snappedBG)
+      v.renderer.removeClass(el, 'active')
+    })
+  }
+
+
+
+
+
 }

@@ -9,7 +9,6 @@ import { RoomInsideComponent } from './rooms/room-list/room-inside/room-inside.c
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-import { StyleGetterDirective } from './style-getter/style-getter.directive'
 
 @NgModule({
   declarations: [
@@ -19,7 +18,6 @@ import { StyleGetterDirective } from './style-getter/style-getter.directive'
     RoomItemComponent,
     RoomInsideComponent,
     PageNotFoundComponent,
-    StyleGetterDirective,
   ],
   imports: [
     BrowserModule,
