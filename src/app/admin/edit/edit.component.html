@@ -1,0 +1,40 @@
+*if user is not loggined in, redirect to login page in app module
+
+<div  *ngIf="!isAuthenticated">You don't have access to this.</div>
+isAuthenticated: {{ isAuthenticated }}
+<div>
+    <div>Logout</div>
+
+    <form
+      #editRoomForm="ngForm"
+      (ngSumbit)="onSubmit(editRoomForm)"
+      >
+      <div class="row">
+        <label for="title">title</label>
+        <input id="title" name="title" type="text" required>
+      </div>
+      <div class="row">
+        <label for="bodytext">bodytext</label>
+        <textarea id="bodytext" name="bodytext" type="text" required></textarea>
+      </div>
+      <div class="row">
+        <label for="footnote">footnote</label>
+        <input id="footnote" name="footnote" type="text" required>
+      </div>
+      <div class="row">
+        <label for="imgPath">imgPath</label>
+        <input id="imgPath" name="imgPath" type="text" required>
+      </div> 
+      <button type="submit">Add a new room</button>
+    </form>
+    
+    <hr>
+    
+    Retrieve all rooms from database
+    <div>
+      <ul *ngFor="let room of rooms">
+        <li>{{ room.title }} <span class="edit">(Edit)</span></li>
+      </ul>
+    </div>  
+</div>
+

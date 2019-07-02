@@ -11,6 +11,7 @@ import { ContentService } from '../../content/content.service'
 })
 export class RoomListComponent implements OnInit, OnDestroy {
 
+  private roomSubscription: Subscription;
   private breathingSubscription: Subscription;
   timeCount: number;
   rooms: Room[];
@@ -24,11 +25,14 @@ export class RoomListComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.rooms = this.roomService.getRooms()
 
+    
+
     this.breathingSubscription = timer(0, 2000).subscribe(count => {
       this.timeCount = count
     })
 
     console.log('checking out ContentService', this.contentService.getContents())
+    this.roomService.fetchRooms()
 
   }
 

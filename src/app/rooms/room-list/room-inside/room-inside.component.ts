@@ -10,7 +10,6 @@ import { RoomService } from '../../room.service'
   selector: 'app-room-inside',
   templateUrl: './room-inside.component.html',
   styleUrls: ['./room-inside.component.scss'],
-  providers: [RoomService]
 })
 export class RoomInsideComponent implements OnInit, OnDestroy {
   

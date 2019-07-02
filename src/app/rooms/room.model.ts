@@ -1,18 +1,15 @@
 export class Room {
   public id: number;
-  public name: string;
-  public description: string;
+  public title: string;
+  public bodytext: string;
+  public footnote: string;
   public imgPath: string;
 
-  constructor(id: number, name?: string, description?: string, imgPath?: string) {
+  constructor(id: number, title?: string, bodytext?: string, imgPath?: string, footnote?:string) {
     this.id = id;
-    this.name = name
-    this.description = description
+    this.title = title
+    this.bodytext = bodytext
+    this.footnote = footnote
     this.imgPath = imgPath
   }
 }
-
-// Shorthand
-// export class Room {
-//   constructor(public name: string, public description: string) {}
-// }

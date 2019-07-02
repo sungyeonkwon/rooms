@@ -1,7 +1,7 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { Content } from './content.model'
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class ContentService {
   
   private contents: Content[] = [
@@ -15,7 +15,12 @@ export class ContentService {
     )
   ]
 
+
   getContents() {
     return this.contents.slice()
+  }
+
+  createAndStoreContent(content: Content){
+
   }
 }

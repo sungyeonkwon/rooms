@@ -55,7 +55,7 @@ app-room-item:nth-child(3).active {
 }
 
 app-room-item:nth-child(4).active {
-  background-color:black;
+  background-color:lightcoral;
   width:30%;
 }
 
@@ -75,8 +75,8 @@ app-room-item:nth-child(7).active {
 }
 
 app-room-item:nth-child(8).active {
-  background-color:black;
-  width:30%;
+  background-color:grey;
+  width:40%;
 }
 
 app-room-item:nth-child(9).active {
@@ -95,7 +95,7 @@ app-room-item:nth-child(11).active {
 }
 
 app-room-item:nth-child(12).active {
-  background-color:black;
+  background-color:lightcyan;
   width:10%;
 }
 
@@ -115,6 +115,6 @@ app-room-item:nth-child(15).active {
 }
 
 app-room-item:nth-child(16).active {
-  background-color:black;
+  background-color:lightseagreen;
   width:10%;
 }

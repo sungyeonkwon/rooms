@@ -2,7 +2,7 @@ import { Input, Component, EventEmitter, ElementRef, AfterViewInit, OnInit, Rend
 import { Router } from '@angular/router';
 import { Room } from '../../room.model';
 import { RoomService } from '../../room.service';
-import { runInThisContext } from 'vm';
+// import { runInThisContext } from 'vm';
 
 
 @Component({

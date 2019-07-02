@@ -1,7 +1,8 @@
 import { EventEmitter, Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http'
 import { Room } from './room.model'
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class RoomService {
   
   private rooms: Room[] = [
@@ -23,8 +24,32 @@ export class RoomService {
     new Room(16, 'Room 16', 'seoncd theme.', 'https://cdn.pixabay.com/photo/2018/12/22/16/36/recipe-3889916_1280.jpg'),
   ]
 
+  constructor(private http: HttpClient){}
+
   getRooms() {
     return this.rooms.slice()
+  }
+
+  // TODO: define return type, probably observable
+  postRoom(): any {
+    // Dummy room data for testing 
+    const roomData: Room = {id:100, title: 'wef', bodytext: 'welifnwef', footnote: 'this is a footnoteee', imgPath:'https://cdn.pixabay.com/photo/2018/12/22/16/36/recipe-3889916_1280.jpg'} 
+    this.http
+    .post(
+      'https://library-of-rooms.firebaseio.com/rooms.json',
+      roomData
+    )
+    .subscribe(responseData => {
+      console.log("room service response data", responseData)
+    })
+  }
+
+  fetchRooms() {
+    this.http
+    .get('https://library-of-rooms.firebaseio.com/rooms.json')
+    .subscribe(rooms => {
+      console.log("[fetchrooms] rooms get data", rooms)
+    })
   }
 
   stopRoomAnimation(elements){
