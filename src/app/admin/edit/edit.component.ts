@@ -26,7 +26,6 @@ export class EditComponent implements OnInit, OnDestroy {
 
     // Get admin state
     // this.adminSub = this.adminService.admin.subscribe()
-    console.log("£££", this.adminService.admin)
     this.adminSub = this.adminService.admin.subscribe(admin => {
       console.log(">>checking, ", admin)
       this.isAuthenticated = true;
@@ -53,7 +52,7 @@ export class EditComponent implements OnInit, OnDestroy {
       .postRoom()
       .subscribe(responseData => {
         console.log("room on submit, responseData", responseData)
-      }, error =>{
+      }, error => {
         console.log("error occured", error)
       })
     form.reset()
