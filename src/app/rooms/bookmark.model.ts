@@ -1,7 +1,5 @@
 interface Highlight {
-  id: number;
-  page: number;
-  location: number;
+  location: string;
   text: string;
 }
 

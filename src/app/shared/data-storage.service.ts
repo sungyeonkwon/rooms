@@ -19,7 +19,7 @@ export class DataStorageService {
   }
 
   fetchRooms() {
-    this.http.get('https://library-of-rooms.firebaseio.com/rooms.json', rooms)
+    this.http.get('https://library-of-rooms.firebaseio.com/rooms.json')
       .subscribe(response => {
         console.log(response)
     })
