@@ -1,10 +1,12 @@
 <div class="canvas">
   <div class="content">
     <h1>Room {{ room.id }}</h1>
-    <p *ngFor="let para of highlights">
-      {{ para.text }}
-      <span class="location">{{ para.location }}</span>
-    </p>
+    <div class="highlights-container">
+      <p *ngFor="let para of bookmark.highlights">
+        {{ para.text }}
+        <span class="location">{{ para.location }}</span>
+      </p>
+    </div>
     <a class="btn-back" [routerLink]="['']">Go back to list</a>
   </div>
 </div>

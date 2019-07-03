@@ -4,7 +4,6 @@ import { interval, Subscription, Observable } from 'rxjs'
 import { map } from 'rxjs/operators'
 
 import { Room } from '../../room.model'
-import { RoomService } from '../../room.service'
 import { Bookmark } from '../../bookmark.model'
 import { BookmarkService } from '../../bookmark.service'
 
@@ -21,13 +20,11 @@ export class RoomInsideComponent implements OnInit, OnDestroy {
   rooms: Room[];
   bookmark: Bookmark
   bookmarks;
-  highlights;
   subscription: Subscription;
   timer: {timepassed: number};
 
   constructor(
     private route: ActivatedRoute, 
-    private roomService: RoomService,
     private bookmarkService: BookmarkService,
     ) {
       this.timer = {timepassed: 0} 
@@ -40,9 +37,6 @@ export class RoomInsideComponent implements OnInit, OnDestroy {
         (bookmarks: Bookmark[]) => {
           this.bookmarks = bookmarks
           this.bookmark = this.bookmarks[this.room.id - 1]
-          this.highlights = this.bookmark.highlights
-          console.log("selectedBookmark", this.bookmark)
-          console.log("highlights", this.highlights)
         }
       )
 
@@ -50,13 +44,6 @@ export class RoomInsideComponent implements OnInit, OnDestroy {
     this.room = {
       id: +this.route.snapshot.params['id'] // unary operator
     }
-
-    // Get all rooms
-    this.rooms = this.roomService.getRooms()
-    const selectedRoom = this.rooms.filter( v => v.id === this.room.id )
-    this.room = selectedRoom[0]
-
-
   
     // // Custom counter observable
     // const customIntervalObservable = Observable.create((observer) => {
