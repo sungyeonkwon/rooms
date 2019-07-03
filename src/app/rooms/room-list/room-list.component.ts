@@ -1,8 +1,7 @@
-import { Component, ElementRef, ViewChildren, OnInit, OnDestroy } from '@angular/core';
+import { Component, ElementRef, ViewChild, ViewChildren, OnInit, OnDestroy } from '@angular/core';
 import { Subscription, timer } from 'rxjs'
 import { Room } from '../room.model'
 import { RoomService } from '../room.service'
-import { ContentService } from '../../content/content.service'
 
 @Component({
   selector: 'app-room-list',
@@ -16,22 +15,18 @@ export class RoomListComponent implements OnInit, OnDestroy {
   timeCount: number;
   rooms: Room[];
   @ViewChildren('roomItem') roomItem: ElementRef;
+  @ViewChild('roomItemSelected', {static: false}) roomItemSelected: ElementRef;
 
   constructor(
     private roomService: RoomService,
-    private contentService: ContentService
   ) { }
 
   ngOnInit() {
     this.rooms = this.roomService.getRooms()
 
-    
-
     this.breathingSubscription = timer(0, 2000).subscribe(count => {
       this.timeCount = count
     })
-
-    console.log('checking out ContentService', this.contentService.getContents())
     this.roomService.fetchRooms()
 
   }
@@ -40,11 +35,18 @@ export class RoomListComponent implements OnInit, OnDestroy {
     this.breathingSubscription.unsubscribe();
   }
 
-  onRoomClicked(): void {
-    console.log("unsubsribe")
-    const roomItem = this.roomItem
-    this.roomService.stopRoomAnimation(roomItem)
-    this.breathingSubscription.unsubscribe();
+  onRoomClicked(event): void {
+    let selectedRoom;
+    const eventPropagationArr = event.path
+    eventPropagationArr.forEach( v => {
+      if (v.tagName == 'APP-ROOM-ITEM'){
+        selectedRoom = v
+      }
+    })
+    console.log("selectedRoom", selectedRoom)
+
+    this.roomService.stopRoomAnimation(this.roomItem, selectedRoom)
+    this.breathingSubscription.unsubscribe(); // Stopping the time-counting
   }
 
 }

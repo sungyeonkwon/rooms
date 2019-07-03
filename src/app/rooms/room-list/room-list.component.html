@@ -1,10 +1,11 @@
 <div class="room-container">
   <app-room-item
+    #roomItemSelected
     #roomItem
     *ngFor="let room of rooms"
     [room]="room"
     [timeCount]="timeCount"
-    (roomClicked)="onRoomClicked()"
+    (roomClicked)="onRoomClicked($event)"
   >
   </app-room-item>
 </div>

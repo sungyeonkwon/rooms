@@ -4,7 +4,6 @@ import { Room } from '../../room.model';
 import { RoomService } from '../../room.service';
 // import { runInThisContext } from 'vm';
 
-
 @Component({
   selector: 'app-room-item',
   templateUrl: './room-item.component.html',
@@ -37,9 +36,9 @@ export class RoomItemComponent implements AfterViewInit {
     this.nextAnimationPoint = !this.nextAnimationPoint
   }
 
-  onRoomClick(event: any) {
-    // Emit event to unsubscribe the parent event
-    this.roomClicked.emit()
+  onRoomClick(event) {
+    // Emit event to unsubscribe the parent event (stop the animation)
+    this.roomClicked.emit(event)
 
     // Go inside of the room
     setTimeout(() => {this.router.navigate(['/room', this.room.id])}, 3000)

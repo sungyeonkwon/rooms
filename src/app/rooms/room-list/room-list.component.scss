@@ -11,6 +11,10 @@ app-room-item {
   height: 25vh;
 }
 
+app-room-item.zoom-in {
+  transform: scale(10);
+}
+
 app-room-item:first-child.active,
 app-room-item:nth-child(2).active,
 app-room-item:nth-child(3).active,
