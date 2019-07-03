@@ -11,12 +11,11 @@ import { Observable, Subscription } from 'rxjs'
   styleUrls: ['./edit.component.scss']
 })
 export class EditComponent implements OnInit, OnDestroy {
-  private adminSub: Subscription;
+  adminSub: Subscription;
   // isAuthenticated = false;
   subscription: Subscription;
   bookmarks;
-
-  @ViewChild('f', {static: false}) myForm: NgForm; 
+  @ViewChild('f', {static: false}) editingForm: NgForm; 
 
   constructor(
     private bookmarkService: BookmarkService,
@@ -24,13 +23,15 @@ export class EditComponent implements OnInit, OnDestroy {
     ) { }
 
   ngOnInit() {
+    console.log("this.bookmarkService.bookmarksChanged")
+    this.bookmarks = this.bookmarkService.fetchBookmarks();
+    
     this.subscription = this.bookmarkService.bookmarksChanged
       .subscribe(
         (bookmarks: Bookmark[]) => {
           this.bookmarks = bookmarks
         }
       )
-    this.bookmarks = this.bookmarkService.fetchBookmarks();
 
     this.adminSub = this.adminService.admin.subscribe(admin => {
       console.log(">>checking, ", admin)
@@ -42,9 +43,9 @@ export class EditComponent implements OnInit, OnDestroy {
   }
 
   onClick(){
-    const object = this.myForm.value.test
+    const object = this.editingForm.value.test
     this.bookmarkService.postBookmarks(object)
-    this.myForm.reset()
+    this.editingForm.reset()
   }
 
 }
