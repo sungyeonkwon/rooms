@@ -6,34 +6,24 @@ isAuthenticated: {{ isAuthenticated }}
     <div>Logout</div>
 
     <form
-      #editRoomForm="ngForm"
-      (ngSumbit)="onSubmit(editRoomForm)"
+      #f = "ngForm"
+      (ngSumbit)="onClick(f)"
       >
       <div class="row">
-        <label for="title">title</label>
-        <input id="title" name="title" type="text" required>
+        <label for="test">json</label>
+        <textarea id="test" name="test" type="text" ngModel required></textarea>
       </div>
-      <div class="row">
-        <label for="bodytext">bodytext</label>
-        <textarea id="bodytext" name="bodytext" type="text" required></textarea>
-      </div>
-      <div class="row">
-        <label for="footnote">footnote</label>
-        <input id="footnote" name="footnote" type="text" required>
-      </div>
-      <div class="row">
-        <label for="imgPath">imgPath</label>
-        <input id="imgPath" name="imgPath" type="text" required>
-      </div> 
-      <button type="submit">Add a new room</button>
+      <span (click) = "onClick()">Add Bookmark</span>
     </form>
     
     <hr>
-    
-    Retrieve all rooms from database
     <div>
-      <ul *ngFor="let room of rooms">
-        <li>{{ room.title }} <span class="edit">(Edit)</span></li>
+      <ul *ngFor="let bookmark of bookmarks">
+        <li>{{ bookmark.title }} 
+          <span class="edit">(Edit)</span>
+          <span class="delete">(Delete)</span>
+          <span class="delete">(Lock/Unlock)</span>
+        </li>
       </ul>
     </div>  
 </div>

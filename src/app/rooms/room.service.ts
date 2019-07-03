@@ -35,13 +35,13 @@ export class RoomService {
     // Dummy room data for testing 
     const roomData: Room = {id:100, title: 'wef', bodytext: 'welifnwef', footnote: 'this is a footnoteee', imgPath:'https://cdn.pixabay.com/photo/2018/12/22/16/36/recipe-3889916_1280.jpg'} 
     this.http
-    .post(
-      'https://library-of-rooms.firebaseio.com/rooms.json',
-      roomData
-    )
-    .subscribe(responseData => {
-      console.log("room service response data", responseData)
-    })
+      .post(
+        'https://library-of-rooms.firebaseio.com/rooms.json',
+        roomData
+      )
+      .subscribe(responseData => {
+        console.log("room service response data", responseData)
+      })
   }
 
   fetchRooms() {

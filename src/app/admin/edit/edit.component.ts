@@ -1,7 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core'
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core'
 import { NgForm } from '@angular/forms'
-import { RoomService } from '../../rooms/room.service'
-import { Room } from '../../rooms/room.model'
+import { Bookmark } from '../../rooms/bookmark.model' 
+import { BookmarkService } from '../../rooms/bookmark.service'
 import { AdminService, AdminResponseData } from '../admin.service'
 import { Observable, Subscription } from 'rxjs'
 
@@ -12,51 +12,39 @@ import { Observable, Subscription } from 'rxjs'
 })
 export class EditComponent implements OnInit, OnDestroy {
   private adminSub: Subscription;
-  isAuthenticated = false;
-  rooms: Room[]
+  // isAuthenticated = false;
+  subscription: Subscription;
+  bookmarks;
+
+  @ViewChild('f', {static: false}) myForm: NgForm; 
 
   constructor(
-    private roomService: RoomService,
+    private bookmarkService: BookmarkService,
     private adminService: AdminService
     ) { }
 
   ngOnInit() {
-    // Need to fetch from database, not get rooms
-    this.rooms = this.roomService.getRooms()
+    this.subscription = this.bookmarkService.bookmarksChanged
+      .subscribe(
+        (bookmarks: Bookmark[]) => {
+          this.bookmarks = bookmarks
+        }
+      )
+    this.bookmarks = this.bookmarkService.fetchBookmarks();
 
-    // Get admin state
-    // this.adminSub = this.adminService.admin.subscribe()
     this.adminSub = this.adminService.admin.subscribe(admin => {
       console.log(">>checking, ", admin)
-      this.isAuthenticated = true;
     });
-    console.log("adminSub", this.adminSub)
   }
 
   ngOnDestroy() {
     this.adminSub.unsubscribe();
   }
 
-  onSubmit(form:NgForm){
-    // if (!form.valid) { 
-    //   console.log("for some unknown reasons this form is not valid")
-    //   return;
-    // }
-    const title = form.value.title
-    const bodytext = form.value.bodytext
-    const footnote = form.value.footnote
-    const imgPath = form.value.imgPath
-
-    // data sotrage overlap!
-    this.roomService
-      .postRoom()
-      .subscribe(responseData => {
-        console.log("room on submit, responseData", responseData)
-      }, error => {
-        console.log("error occured", error)
-      })
-    form.reset()
-
+  onClick(){
+    const object = this.myForm.value.test
+    this.bookmarkService.postBookmarks(object)
+    this.myForm.reset()
   }
 
 }
