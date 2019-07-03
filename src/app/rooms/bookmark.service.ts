@@ -12,6 +12,10 @@ export class BookmarkService {
 
   constructor(private http: HttpClient){}
 
+  getBookmarks() {
+    return this.bookmarks.slice()
+  }
+
   fetchBookmarks() {
     this.http
       .get<Bookmark[]>('https://library-of-rooms.firebaseio.com/bookmarks.json')

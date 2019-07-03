@@ -6,11 +6,11 @@ interface Highlight {
 export class Bookmark {
   public title: string;
   public author: string;
-  public hightlights: Highlight[];
+  public highlights: Highlight[];
 
-  constructor(title: string, author: string, hightlights?: Highlight[]) {
+  constructor(title: string, author: string, highlights?: Highlight[]) {
     this.title = title
     this.author = author
-    this.hightlights = hightlights
+    this.highlights = highlights
   }
 }

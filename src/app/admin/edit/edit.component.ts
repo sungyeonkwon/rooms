@@ -25,7 +25,6 @@ export class EditComponent implements OnInit, OnDestroy {
   ngOnInit() {
     console.log("this.bookmarkService.bookmarksChanged")
     this.bookmarks = this.bookmarkService.fetchBookmarks();
-    
     this.subscription = this.bookmarkService.bookmarksChanged
       .subscribe(
         (bookmarks: Bookmark[]) => {
