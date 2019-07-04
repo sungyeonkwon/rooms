@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, Renderer2, ElementRef, OnInit, OnDestroy, ViewChild, AfterViewInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router'
 import { interval, Subscription, Observable } from 'rxjs'
 import { map } from 'rxjs/operators'
@@ -12,9 +12,9 @@ import { BookmarkService } from '../../bookmark.service'
   templateUrl: './room-inside.component.html',
   styleUrls: ['./room-inside.component.scss'],
 })
-export class RoomInsideComponent implements OnInit, OnDestroy {
+export class RoomInsideComponent implements OnInit, OnDestroy, AfterViewInit {
   
-  private ObsSubscription: Subscription;
+  @ViewChild('content', {static: false}) content: ElementRef;
 
   room: {id:number, name?:string, description?:string, imgPath?:string};
   rooms: Room[];
@@ -26,6 +26,8 @@ export class RoomInsideComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute, 
     private bookmarkService: BookmarkService,
+    private renderer: Renderer2,
+    private el: ElementRef,
     ) {
       this.timer = {timepassed: 0} 
   }
@@ -44,6 +46,9 @@ export class RoomInsideComponent implements OnInit, OnDestroy {
     this.room = {
       id: +this.route.snapshot.params['id'] // unary operator
     }
+
+    // setTimeout(() => {this.renderer.removeClass(this.container.el.nativeElement, 'start')}, 500)
+
   
     // // Custom counter observable
     // const customIntervalObservable = Observable.create((observer) => {
@@ -75,9 +80,13 @@ export class RoomInsideComponent implements OnInit, OnDestroy {
     //   })
   }
 
+  ngAfterViewInit(){
+    console.log("grabbing?", this.content.nativeElement.classList.add('start'))
+  }
+
   ngOnDestroy(): void {
-    console.log("about to destroy sub:", this.ObsSubscription)
-    this.ObsSubscription.unsubscribe()
+    // console.log("about to destroy sub:", this.ObsSubscription)
+    // this.ObsSubscription.unsubscribe()
   }
 
 }

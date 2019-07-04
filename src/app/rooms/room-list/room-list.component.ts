@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild, ViewChildren, OnInit, OnDestroy } from '@angular/core';
+import { Component, ElementRef, ViewChild, ViewChildren, Renderer2, OnInit, OnDestroy } from '@angular/core';
 import { Subscription, timer } from 'rxjs'
 import { Room } from '../room.model'
 import { RoomService } from '../room.service'
@@ -10,14 +10,14 @@ import { RoomService } from '../room.service'
 })
 export class RoomListComponent implements OnInit, OnDestroy {
 
-  private roomSubscription: Subscription;
   private breathingSubscription: Subscription;
   timeCount: number;
   rooms: Room[];
   @ViewChildren('roomItem') roomItem: ElementRef;
-  @ViewChild('roomItemSelected', {static: false}) roomItemSelected: ElementRef;
+  // @ViewChild('roomItemSelected', {static: false}) roomItemSelected: ElementRef;
 
   constructor(
+    // private renderer: Renderer2,
     private roomService: RoomService,
   ) { }
 
@@ -43,8 +43,6 @@ export class RoomListComponent implements OnInit, OnDestroy {
         selectedRoom = v
       }
     })
-    console.log("selectedRoom", selectedRoom)
-
     this.roomService.stopRoomAnimation(this.roomItem, selectedRoom)
     this.breathingSubscription.unsubscribe(); // Stopping the time-counting
   }

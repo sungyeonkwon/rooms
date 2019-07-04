@@ -10,11 +10,23 @@
 }
 
 .content {
+  transform: scale(0.3);
+  opacity: 0.2;
+  transform-origin: top;
+  // transition: transform 2s ease-in-out;
+  transition-property: transform, opacity;
+  transition-duration: 1.5s;
+  transition-timing-function: ease-in-out;
+}
+
+.content.start {
+  opacity: 1;
+  transform: scale(1);
   width:100%;
   min-height: 100vh;
   background:black;
   padding:40px;
-  max-width: 1000px;
+  max-width: 1200px;
   margin: 0 auto;
   text-align: center;
   color: white;
@@ -26,9 +38,8 @@
 
   p {
     text-align: left;
-    width:90%;
     line-height: 1.35em;
-    font-size: 20px;
+    font-size: 23px;
     margin-bottom:40px;
   }
 }

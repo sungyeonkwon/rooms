@@ -41,7 +41,7 @@ export class RoomItemComponent implements AfterViewInit {
     this.roomClicked.emit(event)
 
     // Go inside of the room
-    setTimeout(() => {this.router.navigate(['/room', this.room.id])}, 3000)
+    setTimeout(() => {this.router.navigate(['/room', this.room.id])}, 800)
   }
 }
 

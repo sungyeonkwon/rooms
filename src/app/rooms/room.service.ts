@@ -72,6 +72,7 @@ export class RoomService {
     })
     // For selected room, apply zoom animation TODO: use renderer? renderer needs to be passed
     console.log("[stopRoomAnimation] selectedEl", selectedRoom)
+    selectedRoom.classList.add('bg-black');
     selectedRoom.classList.add('zoom-in');
 
   }
