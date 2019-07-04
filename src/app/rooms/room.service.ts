@@ -53,6 +53,7 @@ export class RoomService {
   }
 
   stopRoomAnimation(allRooms, selectedRoom){
+    
     // Stop animation
     allRooms.forEach((v) => {
       const el = v.el.nativeElement
@@ -71,8 +72,9 @@ export class RoomService {
 
     })
     // For selected room, apply zoom animation TODO: use renderer? renderer needs to be passed
-    console.log("[stopRoomAnimation] selectedEl", selectedRoom)
-    selectedRoom.classList.add('bg-black');
+    console.log("[stopRoomAnimation] selectedEl", selectedRoom.style)
+    selectedRoom.style.background = 'black'
+    // selectedRoom.classList.add('bg-black');
     selectedRoom.classList.add('zoom-in');
 
   }

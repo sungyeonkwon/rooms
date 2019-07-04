@@ -5,14 +5,14 @@
 }
 
 app-room-item {
-  transition: width 2s ease-in-out, height 2s ease-in-out, background-color 2s ease-in-out, transform 1.3s ease-in-out;
+  transition: width 2s ease-in-out, height 2s ease-in-out, background-color 2s ease-in-out, transform 1.5s ease-in-out;
   background-color: orange;
   width: 25%;
   height: 25vh;
 }
 
 app-room-item.zoom-in {
-  transform: scale(25);
+  transform: scale(20);
 }
 
 app-room-item.bg-black {

@@ -2,7 +2,8 @@
   <div
     #content 
     class="content">
-    <h1>Room {{ room.id }}</h1>
+    <h1>Entered the room {{ room.id }}.</h1>
+    <div class="exit" (click)="onClickExit()">Leave the room</div>
     <div class="highlights-container">
       <p *ngFor="let para of bookmark.highlights">
         {{ para.text }}

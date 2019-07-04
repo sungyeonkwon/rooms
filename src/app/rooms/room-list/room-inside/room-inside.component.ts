@@ -1,5 +1,5 @@
 import { Component, Renderer2, ElementRef, OnInit, OnDestroy, ViewChild, AfterViewInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router'
+import { Router, ActivatedRoute } from '@angular/router'
 import { interval, Subscription, Observable } from 'rxjs'
 import { map } from 'rxjs/operators'
 
@@ -24,6 +24,7 @@ export class RoomInsideComponent implements OnInit, OnDestroy, AfterViewInit {
   timer: {timepassed: number};
 
   constructor(
+    private router: Router,
     private route: ActivatedRoute, 
     private bookmarkService: BookmarkService,
     private renderer: Renderer2,
@@ -87,6 +88,13 @@ export class RoomInsideComponent implements OnInit, OnDestroy, AfterViewInit {
   ngOnDestroy(): void {
     // console.log("about to destroy sub:", this.ObsSubscription)
     // this.ObsSubscription.unsubscribe()
+  }
+
+  onClickExit() {
+    console.log('gonna go out')
+    this.content.nativeElement.classList.remove('start')
+    // Go inside of the room
+    setTimeout(() => {this.router.navigate([''])}, 1500)
   }
 
 }
